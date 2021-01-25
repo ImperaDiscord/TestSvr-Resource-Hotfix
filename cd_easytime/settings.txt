@@ -1,1 +1,1 @@
-{"weather":"SNOW","mins":18,"dynamic":false,"blackout":false,"freeze":false,"hours":1}
+{"mins":53,"weather":"SNOW","freeze":false,"blackout":false,"dynamic":false,"hours":0}

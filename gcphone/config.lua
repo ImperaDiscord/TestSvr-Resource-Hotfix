@@ -16,7 +16,7 @@ Config.FixePhone = {
   },
 }
 
-Config.KeyOpenClose = 323 -- keyboard x or gamepad [NONE]
+Config.KeyOpenClose = 166 -- keyboard F5 or gamepad [NONE]
 
 Config.KeyTakeCall  = 38  -- E or gamepad [LB]
 

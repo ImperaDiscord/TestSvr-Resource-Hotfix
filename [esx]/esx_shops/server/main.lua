@@ -63,13 +63,14 @@ AddEventHandler('esx_shops:buyItem', function(itemName, amount, zone)
 		else
 			xPlayer.showNotification(_U('player_cannot_hold'))
 		end
-	else if xPlayer.getMoney() >= price then --If no bank, but they have cash
+	elseif xPlayer.getMoney() >= price then --If no bank, but they have cash
 		if xPlayer.canCarryItem(itemName, amount) then -- can the player carry the said amount of x item?
 			xPlayer.removeMoney(price)	
 			xPlayer.addInventoryItem(itemName, amount)
 			xPlayer.showNotification(_U('bought', amount, itemLabel, ESX.Math.GroupDigits(price)))
 		else
 			xPlayer.showNotification(_U('player_cannot_hold'))
+		end
 	else --If no bank, and no cash
 		local missingMoney = price - xPlayer.getMoney()
 		xPlayer.showNotification(_U('not_enough', ESX.Math.GroupDigits(missingMoney)))

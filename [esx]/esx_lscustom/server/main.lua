@@ -29,8 +29,8 @@ AddEventHandler('esx_lscustom:buyMod', function(price)
 			xPlayer.removeAccountMoney('bank', price)
 			TriggerClientEvent('esx_lscustom:installMod', _source)
 			TriggerClientEvent('esx:showNotification', _source, _U('purchased'))
-			end)
-		else if xPlayer.getMoney() >= price then --If no bank, but they have cash
+			
+		elseif xPlayer.getMoney() >= price then --If no bank, but they have cash
 				xPlayer.removeMoney(price)
 				TriggerClientEvent('esx_lscustom:installMod', _source)
 				TriggerClientEvent('esx:showNotification', _source, _U('purchased'))

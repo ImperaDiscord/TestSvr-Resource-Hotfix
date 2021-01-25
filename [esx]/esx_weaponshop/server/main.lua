@@ -35,10 +35,11 @@ ESX.RegisterServerCallback('esx_weaponshop:buyLicense', function(source, cb)
 		TriggerEvent('esx_license:addLicense', source, 'weapon', function()
 			cb(true)
 		end)
-	else if xPlayer.getMoney() >= Config.LicensePrice then --If no bank, but they have cash
+	elseif xPlayer.getMoney() >= Config.LicensePrice then --If no bank, but they have cash
         xPlayer.removeMoney(Config.LicensePrice)
         TriggerEvent('esx_license:addLicense', source, 'weapon', function()
-        cb(true)
+        	cb(true) 
+   		end)
     else --If no bank, and no cash
 		xPlayer.showNotification(_U('not_enough'))
 		cb(false)
@@ -53,25 +54,22 @@ ESX.RegisterServerCallback('esx_weaponshop:buyWeapon', function(source, cb, weap
 	if price == 0 then
 		print(('esx_weaponshop: %s attempted to buy a unknown weapon!'):format(xPlayer.identifier))
 		cb(false)
-	else
+	else 
 		if xPlayer.hasWeapon(weaponName) then
-			print("pre vars")
-			local playerPed  = GetPlayerPed(-1)
-			local weaponList = ESX.GetWeaponList()
-			local a = xPlayer.inventory
-			print(a)
-			
-			xPlayer.removeWeapon(weaponName)
-			print('esx_weaponshop: This weapon got removed!')
-			xPlayer.addWeapon(weaponName, 200) -- TODO: Tie this to a column in the DB that determines num of ammo
-			--ADD_AMMO_TO_PED(playerPed, weaponName, 300) --Added from Kakarot
-			--GiveWeaponToPed(xPlayer, weaponName, 100, false, false) -- Gonna try this next
-			--AddAmmoToPed(xPlayer, GetWeaponLabel(weaponName), 100)
-			print(('esx_weaponshop: And then %s did!! addWeapon and removing the weapon was used'):format(xPlayer.identifier))
-			--xPlayer.addWeapon(weaponName, 50)
-			--xPlayer.showNotification(_U('already_owned'))
-			cb(true)
-		else
+			if xPlayer.getAccount('bank').money >= price then --Check bank, can they afford ammo?
+				xPlayer.removeAccountMoney('bank', price)
+				xPlayer.removeWeapon(weaponName)
+				print('esx_weaponshop: This weapon got removed!')		
+				xPlayer.addWeapon(weaponName, 200) -- TODO: Tie this to a column in the DB that determines num of ammo
+				cb(true)
+			elseif xPlayer.getMoney() >= price then -- If they have cash for ammo
+				xPlayer.removeMoney(price)
+				cb(true)
+			else 
+				xPlayer.showNotification(_U('not_enough'))
+				cb(false)
+			end
+		else -- If they don't have the weapon
 			if zone == 'BlackWeashop' then
 				if xPlayer.getAccount('black_money').money >= price then
 					xPlayer.removeAccountMoney('black_money', price)
@@ -82,22 +80,24 @@ ESX.RegisterServerCallback('esx_weaponshop:buyWeapon', function(source, cb, weap
 					xPlayer.showNotification(_U('not_enough_black'))
 					cb(false)
 				end
-			else -- Player doesn't own the gun, let's buy the gun
-				if xPlayer.getAccount('bank').money >=  price then -- Check bank
+			else -- If they're at a legal weapon shop
+				if xPlayer.getAccount('bank').money >= price then --Check bank, can they afford ammo?
 					xPlayer.removeAccountMoney('bank', price)
-					xPlayer.addWeapon(weaponName, 42)
-	
+					xPlayer.removeWeapon(weaponName)
+					print('esx_weaponshop: This weapon got removed!')		
+					xPlayer.addWeapon(weaponName, 42) -- TODO: Tie this to a column in the DB that determines num of ammo
 					cb(true)
-				else if  xPlayer.getMoney() >= price then -- If they have that cash tho
+				elseif xPlayer.getMoney() >= price then -- If they have cash for ammo
 					xPlayer.removeMoney(price)
 					xPlayer.addWeapon(weaponName, 42)
-				else -- Broke-ass
+					cb(true)
+				else
 					xPlayer.showNotification(_U('not_enough'))
 					cb(false)
 				end
-			end
-		end
-	end
+			end 
+		end 
+	end 
 end)
 
 function GetPrice(weaponName, zone)

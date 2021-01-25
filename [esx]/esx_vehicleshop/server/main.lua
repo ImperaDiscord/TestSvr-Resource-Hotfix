@@ -195,9 +195,19 @@ ESX.RegisterServerCallback('esx_vehicleshop:buyVehicle', function(source, cb, mo
 		end
 	end
 
-	if modelPrice and xPlayer.getMoney() >= modelPrice then
-		xPlayer.removeMoney(modelPrice)
 
+	if modelPrice and xPlayer.getAccount('bank').money >= modelPrice then
+		xPlayer.removeAccountMoney('bank', modelPrice)
+		MySQL.Async.execute('INSERT INTO owned_vehicles (owner, plate, vehicle) VALUES (@owner, @plate, @vehicle)', {
+			['@owner']   = xPlayer.identifier,
+			['@plate']   = plate,
+			['@vehicle'] = json.encode({model = GetHashKey(model), plate = plate})
+		}, function(rowsChanged)
+			xPlayer.showNotification(_U('vehicle_belongs', plate))
+			cb(true)
+		end)
+	elseif modelPrice and xPlayer.getMoney() >= modelPrice then
+		xPlayer.removeMoney(modelPrice)
 		MySQL.Async.execute('INSERT INTO owned_vehicles (owner, plate, vehicle) VALUES (@owner, @plate, @vehicle)', {
 			['@owner']   = xPlayer.identifier,
 			['@plate']   = plate,
