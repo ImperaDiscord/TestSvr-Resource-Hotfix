@@ -32,7 +32,7 @@ function OpenShopMenu()
 
 					TriggerServerEvent('esx_barbershop:paycard')
 					hasPaid = true
-				else if ESX.getMoney() >= config.price then --If no bank, but they have cash
+				elseif ESX.getMoney() >= config.price then --If no bank, but they have cash
 					ESX.removeMoney(config.price)
 						TriggerEvent('skinchanger:getSkin', function(skin)
 							TriggerServerEvent('esx_skin:save', skin)

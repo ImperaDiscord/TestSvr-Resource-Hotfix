@@ -91,22 +91,22 @@ Config.DisplayCars = {
 }
 
 -- [[ DISPLAY KEYS ]] --
-Config.KeyToBuyVeh 			= 47	-- G 			: Key to buy vehicle from display
-Config.KeyToConfirmBuyVeh 	= 38	-- E 			: Key to confirm vehicle purchase from display
-Config.KeyToCancelBuyVeh 	= 202	-- Backspace 	: Key to cancel vehicle purchase from display
+Config.KeyToBuyVeh 			= 47	-- G, Controller DPAD Left 				: Key to buy vehicle from display
+Config.KeyToConfirmBuyVeh 	= 38	-- E, Controller LB 					: Key to confirm vehicle purchase from display
+Config.KeyToCancelBuyVeh 	= 202	-- Backspace/ESC, Controller B  		: Key to cancel vehicle purchase from display
 
-Config.KeyToSwapVehicle		= 38	-- E			: Key to replace display vehicle 
-Config.KeyToTestVehicle		= 74	-- H			: Key to test drive display vehicle 
+Config.KeyToSwapVehicle		= 38	-- E, Controller LB						: Key to replace display vehicle 
+Config.KeyToTestVehicle		= 74	-- H, Controller DPAD Right				: Key to test drive display vehicle 
 
-Config.KeyToChangeCom1		= 174	-- LEFT ARROW	: Key to change commission (-1) per click
-Config.KeyToChangeCom2		= 175	-- RIGHT ARROW	: Key to change commission (+1) per click
+Config.KeyToChangeCom1		= 174	-- LEFT ARROW, Controller DPAD Left		: Key to change commission (-1) per click
+Config.KeyToChangeCom2		= 175	-- RIGHT ARROW, Controller DPAD Right	: Key to change commission (+1) per click
 
-Config.KeyToFinanceVeh 		= 144	-- F			: Key to finance vehicle from display
-Config.KeyToConfirmFinance 	= 144	-- F 			: Key to confirm vehicle finance from display
-Config.KeyToCancelFinance 	= 202	-- Backspace 	: Key to cancel vehicle finance from display
+Config.KeyToFinanceVeh 		= 144	-- F, Controller Y						: Key to finance vehicle from display
+Config.KeyToConfirmFinance 	= 144	-- F, Controller Y 						: Key to confirm vehicle finance from display
+Config.KeyToCancelFinance 	= 202	-- Backspace/ESC, Controller B 			: Key to cancel vehicle finance from display
 
-Config.KeyToChangeDownPay1	= 173	-- DOWN ARROW	: Key to change downpayment (-1) per click
-Config.KeyToChangeDownPay2	= 172	-- UP ARROW		: Key to change downpayment (+1) per click
+Config.KeyToChangeDownPay1	= 173	-- DOWN ARROW, Controller DPAD Down		: Key to change downpayment (-1) per click
+Config.KeyToChangeDownPay2	= 172	-- UP ARROW, Controller DPAD Up			: Key to change downpayment (+1) per click
 
 
 -- [[ VEHICLE FINANCING ]] --
